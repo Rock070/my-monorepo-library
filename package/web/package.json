@@ -1,4 +1,5 @@
 {
+  "name": "web",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -8,5 +9,8 @@
   },
   "devDependencies": {
     "nuxt": "3.0.0-rc.5"
+  },
+  "dependencies": {
+    "ui": "workspace:^1.0.0"
   }
 }

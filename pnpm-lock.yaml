@@ -17,6 +17,9 @@ importers:
   package/web:
     specifiers:
       nuxt: 3.0.0-rc.5
+      ui: workspace:^1.0.0
+    dependencies:
+      ui: link:../ui
     devDependencies:
       nuxt: 3.0.0-rc.5
 

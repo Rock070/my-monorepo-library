@@ -1,4 +1,4 @@
-# Atomic Component & Convenient Utils 
+# Vue Atomic Component & Convenient Utils 
 
 ```shell
 package

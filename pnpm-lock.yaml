@@ -14,12 +14,12 @@ importers:
   package/utils:
     specifiers: {}
 
-  package/web:
+  playground:
     specifiers:
       nuxt: 3.0.0-rc.5
       ui: workspace:^1.0.0
     dependencies:
-      ui: link:../ui
+      ui: link:../package/ui
     devDependencies:
       nuxt: 3.0.0-rc.5
 

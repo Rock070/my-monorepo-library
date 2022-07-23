@@ -1,4 +1,3 @@
-import { add } from 'utils'
+import BasicDropdown from './src/atomic/BasicDropdown.vue';
 
-const sum = add(1, 2)
-console.log(sum)
+export default BasicDropdown

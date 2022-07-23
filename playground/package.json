@@ -8,10 +8,11 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.5",
+    "nuxt": "3.0.0-rc.6",
     "nuxt-windicss": "^2.4.3"
   },
   "dependencies": {
-    "ui": "workspace:^1.0.0"
+    "ui": "workspace:^1.0.0",
+    "vite": "2.3.0"
   }
 }

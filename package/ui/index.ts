@@ -1,3 +1,7 @@
-import BasicDropdown from './src/atomic/BasicDropdown.vue';
+import BasicDropdown from './atomic/BasicDropdown/BasicDropdown.vue';
+import BasicDialog from './atomic/BasicDialog/BasicDialog.vue';
 
-export default BasicDropdown
+export {
+  BasicDropdown,
+  BasicDialog
+}

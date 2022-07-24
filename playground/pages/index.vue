@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import 'virtual:windi.css'
+
 </script>
 
-<template>
-  <NuxtPage/>
-</template>
 
+<template>
+  <div>
+    Home
+  </div>
+</template>
 

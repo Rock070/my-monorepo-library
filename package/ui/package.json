@@ -4,13 +4,27 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:reset": "rm -rf node_modules/.vite && pnpm story:dev",
+    "reset": "rm -rf node_modules && pnpm install",
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vueuse/core": "^8.9.4",
     "utils": "workspace:^1.0.0",
+    "vite": "^2.9.0",
     "vue": "^3.2.37"
+  },
+  "peerDependencies": {
+    "@vueuse/core": "^8.9.4",
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "histoire": "^0.8.4"
   }
 }

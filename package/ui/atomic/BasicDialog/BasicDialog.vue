@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, watchEffect, onMounted, computed } from 'vue';
-import CloseIcon from '@/assets/images/svg/closure.svg?component';
+// import CloseIcon from '@/assets/images/svg/closure.svg?component';
 import { useVModel, onClickOutside } from '@vueuse/core';
-import { isClient } from '@/utils';
+// import { isClient } from '@/utils';
+
+const isClient = true
 
 interface Props {
   /**
@@ -34,7 +36,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   show: false,
   isBackdrop: true,
-  isCloseIcon: true,
+  isCloseIcon: false,
   scrollLock: false,
   draggable: false,
   clickOutsideClose: false,
@@ -148,12 +150,12 @@ watchEffect(() => {
               name="title"
             />
           </div>
-          <CloseIcon
+          <!-- <CloseIcon
             width="20"
             height="20"
             class="lg:cursor-pointer"
             @click="_triggerClose"
-          />
+          /> -->
         </div>
         <div
           class="overflow-y-scroll pb-6"

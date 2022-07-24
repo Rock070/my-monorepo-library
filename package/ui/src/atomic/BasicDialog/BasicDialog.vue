@@ -10,7 +10,7 @@ interface Props {
   /**
    * 是否顯示 Modal
    */
-  show: boolean;
+  modelValue: boolean;
   /**
    * 是否有背景使 modal 外的東西不可被訪問
    */
@@ -34,7 +34,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  show: false,
+  modelValue: false,
   isBackdrop: true,
   isCloseIcon: false,
   scrollLock: false,
@@ -42,14 +42,14 @@ const props = withDefaults(defineProps<Props>(), {
   clickOutsideClose: false,
 });
 
-const emit = defineEmits(['update:show', 'close', 'open']);
+const emit = defineEmits(['update:modelValue', 'close', 'open']);
 
 const dialogEl = ref<HTMLDialogElement | null>(null);
 const containerEl = ref<HTMLDivElement | null>(null);
 
 const contentHeight = ref<string>('');
 
-const show = useVModel(props, 'show', emit);
+const show = useVModel(props, 'modelValue', emit);
 
 const close = () => {
   show.value = false;
@@ -103,7 +103,7 @@ if (props.clickOutsideClose) {
  * 監聽 props.show 判斷要開啟或關閉
  */
 watchEffect(() => {
-  if (props.show) open();
+  if (show.value) open();
   else _triggerClose();
 
   if (dialogEl.value?.clientHeight) {

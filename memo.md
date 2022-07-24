@@ -3,7 +3,8 @@
 ## todo List
 
 - playground
-  - 打包 ui 給 web 使用、ui 裝 windi
+  - 打包 ui 給 web 使用
+  - ui 裝 windi
   - eslint
   - story & test case
   - 打包後上去

@@ -17,6 +17,9 @@ module.exports = {
   ],
   rules: {
     'vue/multi-word-component-names': 'off',
-    'no-console': ['error', { allow: ['warn', 'error', 'debug', 'assert'] }]
+    'no-console': ['error', {
+      allow: ['warn', 'error', 'debug', 'assert']
+    }],
+    'no-unused-vars': 'off'
   }
 }

@@ -26,8 +26,6 @@ const menuList = [
     event: () => { alert(123) }
   }
 ]
-
-onClickOutside()
 /**
  * TODO:
  *   - ClickOutsideClose

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useToggle } from '@vueuse/core'
-import Menu from '@/components/contextmenu/menu.vue'
+import { ContextMenu } from 'ui'
 
 const [isMenuOpen, toggleMeunOpen] = useToggle()
 const position = reactive({
@@ -21,7 +21,7 @@ const open = (event: PointerEvent) => {
     class="h-screen w-screen relative"
     @contextmenu.prevent="open"
   >
-    <Menu
+    <ContextMenu
       v-if="isMenuOpen"
       v-model:isMenuOpen="isMenuOpen"
       :position="position"

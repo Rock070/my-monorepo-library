@@ -3,7 +3,5 @@ import 'virtual:windi.css'
 </script>
 
 <template>
-  <NuxtPage/>
+  <NuxtPage />
 </template>
-
-

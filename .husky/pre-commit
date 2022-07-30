@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+pnpm eslint $(git diff --diff-filter=ACM --name-only HEAD | grep -E '\.(ts|js|vue)$') --ignore-path .gitignore .eslintignore

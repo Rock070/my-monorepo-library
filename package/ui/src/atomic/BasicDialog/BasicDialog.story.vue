@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-import BasicDialog from './BasicDialog.vue';
+import { reactive } from 'vue'
+import BasicDialog from './BasicDialog.vue'
 
 const state = reactive({
   show: false,
@@ -8,29 +8,51 @@ const state = reactive({
   isCloseIcon: false,
   scrollLock: false,
   draggable: false,
-  clickOutsideClose: false,
+  clickOutsideClose: false
 })
 
 </script>
 
 <template>
   <Story title="Basic/BasicDialog">
-    <BasicDialog 
+    <BasicDialog
       v-model="state.show"
-      clickOutsideClose
+      click-outside-close
     >
-      <div class="text-red"> 這是一個 Dialog </div>
+      <div class="text-red">
+        這是一個 Dialog
+      </div>
     </BasicDialog>
-    <button @click="state.show = !state.show"> 按鈕 </button>
+    <button @click="state.show = !state.show">
+      按鈕
+    </button>
 
     <template #controls>
       <div class="flex">
-        show: <input type="checkbox" v-model="state.show" />
-        isBackdrop: <input type="checkbox" v-model="state.isBackdrop" />
-        isCloseIcon: <input type="checkbox" v-model="state.isCloseIcon" />
-        scrollLock: <input type="checkbox" v-model="state.scrollLock" />
-        draggable: <input type="checkbox" v-model="state.draggable" />
-        clickOutsideClose: <input type="checkbox" v-model="state.clickOutsideClose" />
+        show: <input
+          v-model="state.show"
+          type="checkbox"
+        >
+        isBackdrop: <input
+          v-model="state.isBackdrop"
+          type="checkbox"
+        >
+        isCloseIcon: <input
+          v-model="state.isCloseIcon"
+          type="checkbox"
+        >
+        scrollLock: <input
+          v-model="state.scrollLock"
+          type="checkbox"
+        >
+        draggable: <input
+          v-model="state.draggable"
+          type="checkbox"
+        >
+        clickOutsideClose: <input
+          v-model="state.clickOutsideClose"
+          type="checkbox"
+        >
       </div>
     </template>
   </Story>

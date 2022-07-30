@@ -1,6 +1,6 @@
-import { defineConfig } from 'histoire';
+import { defineConfig } from 'histoire'
 
-export default defineConfig({ 
+export default defineConfig({
   theme: {
     title: 'Acme Inc.',
     logo: {
@@ -22,12 +22,12 @@ export default defineConfig({
         800: '#27272a',
         850: '#1f1f21',
         900: '#18181b',
-        950: '#101012',
-      },
+        950: '#101012'
+      }
       // gray: defaultColors.zinc,
       // primary: defaultColors.cyan
     },
-    logoHref: 'https://google.com',
+    logoHref: 'https://google.com'
     // favicon: './assets/koala.png',
   },
   setupFile: './src/histoire.setup.ts'

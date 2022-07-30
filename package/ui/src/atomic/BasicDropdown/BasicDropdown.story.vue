@@ -3,7 +3,7 @@ import BasicDropdown from './BasicDropdown.vue'
 </script>
 
 <template>
- <Story title="Basic/BasicDropdown">
+  <Story title="Basic/BasicDropdown">
     <BasicDropdown />
- </Story>  
+  </Story>
 </template>

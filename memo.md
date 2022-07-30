@@ -15,3 +15,4 @@
 - virtural scroll 如 apple 官網
 - 元件庫 
 - 自製右鍵選單 oncontextmenu 事件
+- AE 動畫串接 lottie

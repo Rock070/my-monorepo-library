@@ -16,6 +16,7 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'no-console': ['error', { allow: ['warn', 'error', 'debug', 'assert'] }]
   }
 }

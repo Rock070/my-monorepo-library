@@ -20,6 +20,14 @@ module.exports = {
     'no-console': ['error', {
       allow: ['warn', 'error', 'debug', 'assert']
     }],
-    'no-unused-vars': 'off'
-  }
+    'no-unused-vars': 'warn'
+  },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx', '*.mts', '*.cts'],
+      rules: {
+        'no-undef': 'off'
+      }
+    }
+  ]
 }

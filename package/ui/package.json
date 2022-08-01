@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "dev:reset": "rm -rf node_modules/.vite && pnpm story:dev",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "story:dev:reset": "rm -rf node_modules/.vite && pnpm story:dev",
     "reset": "rm -rf node_modules && pnpm install",
     "story:dev": "histoire dev",
     "story:build": "histoire build",

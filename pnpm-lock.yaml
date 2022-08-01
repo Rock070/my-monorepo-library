@@ -31,7 +31,10 @@ importers:
       typescript: 4.7.4
 
   package/composables:
-    specifiers: {}
+    specifiers:
+      utils: workspace:^1.0.0
+    dependencies:
+      utils: link:../utils
 
   package/ui:
     specifiers:
@@ -64,19 +67,21 @@ importers:
       '@vueuse/core': ^8.9.4
       composables: workspace:^1.0.0
       nuxt: 3.0.0-rc.6
-      nuxt-windicss: ^2.4.3
+      nuxt-windicss: ^2.5.0
       ui: workspace:^1.0.0
+      utils: workspace:^1.0.0
       vite: 2.9.0
       vue: ^3.2.31
     dependencies:
       '@vueuse/core': 8.9.4_vue@3.2.37
       composables: link:../package/composables
       ui: link:../package/ui
+      utils: link:../package/utils
       vite: 2.9.0
       vue: 3.2.37
     devDependencies:
       nuxt: 3.0.0-rc.6_vite@2.9.0
-      nuxt-windicss: 2.4.3_vite@2.9.0
+      nuxt-windicss: 2.5.0_vite@2.9.0
 
 packages:
 
@@ -749,36 +754,6 @@ packages:
       - webpack
     dev: true
 
-  /@nuxt/kit/3.0.0-rc.4_vite@2.9.0:
-    resolution: {integrity: sha512-ZBSeHFy3fPUx0equCtyP6eVUAZQWwRqTp2YnHSFqM5+yhN5aTGo8gBlfwttVBr4yhFBpGFRHhQj/iNPqrCeTnQ==}
-    engines: {node: ^14.16.0 || ^16.11.0 || ^17.0.0 || ^18.0.0}
-    dependencies:
-      '@nuxt/schema': 3.0.0-rc.5_vite@2.9.0
-      c12: 0.2.8
-      consola: 2.15.3
-      defu: 6.0.0
-      globby: 13.1.2
-      hash-sum: 2.0.0
-      ignore: 5.2.0
-      jiti: 1.14.0
-      knitwork: 0.1.2
-      lodash.template: 4.5.0
-      mlly: 0.5.4
-      pathe: 0.3.2
-      pkg-types: 0.3.3
-      scule: 0.2.1
-      semver: 7.3.7
-      unctx: 1.1.4_vite@2.9.0
-      unimport: 0.2.10_vite@2.9.0
-      untyped: 0.4.4
-    transitivePeerDependencies:
-      - esbuild
-      - rollup
-      - supports-color
-      - vite
-      - webpack
-    dev: true
-
   /@nuxt/kit/3.0.0-rc.6_34lyoy2px4mwvanejqhdojvpg4:
     resolution: {integrity: sha512-+lxSd6dSWlAzMXfGOPcY4856xnMF1Ck1rycFUZ+K2QYiDXphq/fiW2eMaWLVvqgPyL2Box2WzVDZJ6C5ceptcw==}
     engines: {node: ^14.16.0 || ^16.11.0 || ^17.0.0 || ^18.0.0}
@@ -835,27 +810,6 @@ packages:
       - esbuild
       - rollup
       - supports-color
-      - vite
-      - webpack
-    dev: true
-
-  /@nuxt/schema/3.0.0-rc.5_vite@2.9.0:
-    resolution: {integrity: sha512-qfKr9/1i7buLEgJ1Vjw27LJ5Svtq9jB5TvFAbIfDI9fg80M/bgTDXgKXARJk6ofB39Ijdx8z2nNj8EXu8+tVbQ==}
-    engines: {node: ^14.16.0 || ^16.11.0 || ^17.0.0 || ^18.0.0}
-    dependencies:
-      c12: 0.2.8
-      create-require: 1.1.1
-      defu: 6.0.0
-      jiti: 1.14.0
-      pathe: 0.3.2
-      postcss-import-resolver: 2.0.0
-      scule: 0.2.1
-      std-env: 3.1.1
-      ufo: 0.8.5
-      unimport: 0.4.5_vite@2.9.0
-    transitivePeerDependencies:
-      - esbuild
-      - rollup
       - vite
       - webpack
     dev: true
@@ -3680,6 +3634,15 @@ packages:
       ufo: 0.8.5
     dev: true
 
+  /h3/0.7.12:
+    resolution: {integrity: sha512-RLil5Hr4lzK52eQL3zEG6rE7OqYC8SwmPkcc1AoLIgJAqGRRgfrtkb/NYUWui0/DMeErzhGjaO0pjEuXyILzOw==}
+    dependencies:
+      cookie-es: 0.5.0
+      destr: 1.1.1
+      radix3: 0.1.2
+      ufo: 0.8.5
+    dev: true
+
   /happy-dom/2.55.0:
     resolution: {integrity: sha512-CHDMBRau+l/yKQL+ANmexRAC8FRCuYbXRSpu/GbLVyfqkrlBzV7OSNd5C5HZ+pVFtFv1bFJYC5r+xrqgGQuq5w==}
     dependencies:
@@ -4910,15 +4873,16 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /nuxt-windicss/2.4.3_vite@2.9.0:
-    resolution: {integrity: sha512-XxKeCNGRpUZL0N3WSN23gTtjK7LCde0aXi6g9Ase6nYypLF2n3GB8FDgBI8uufFKPSAOeqnITW1+7O8+RWKblQ==}
+  /nuxt-windicss/2.5.0_vite@2.9.0:
+    resolution: {integrity: sha512-h5Wh1Pj5OrYvbQmfarOxi6I366xyPxYVlUIZhu5OPGn0uUaoQIOl5ASR1QD3eR/BH3kdpM/r8wyjikDoW7oSbg==}
     dependencies:
-      '@nuxt/kit': 3.0.0-rc.4_vite@2.9.0
+      '@nuxt/kit': 3.0.0-rc.6_vite@2.9.0
+      '@windicss/config': 1.8.7
       '@windicss/plugin-utils': 1.8.7
       consola: 2.15.3
       defu: 6.0.0
       fs-extra: 10.1.0
-      h3: 0.7.10
+      h3: 0.7.12
       listhen: 0.2.13
       pathe: 0.3.2
       read-cache: 1.0.0
@@ -4926,7 +4890,7 @@ packages:
       vite-plugin-windicss: 1.8.7_vite@2.9.0
       windicss: 3.5.6
       windicss-analysis: 0.3.5
-      windicss-webpack-plugin: 1.7.4
+      windicss-webpack-plugin: 1.7.5
     transitivePeerDependencies:
       - esbuild
       - rollup
@@ -6658,26 +6622,6 @@ packages:
       - webpack
     dev: true
 
-  /unimport/0.2.10_vite@2.9.0:
-    resolution: {integrity: sha512-HoQ0ZDzHJboRYJ4/YxtMAATxiya/s5C2UE6jLFNj1e0D6Qfq6Pw2P40L+ALCkjLwLhR8l2VROE7kba/AaFtdQg==}
-    dependencies:
-      '@rollup/pluginutils': 4.2.1
-      escape-string-regexp: 5.0.0
-      fast-glob: 3.2.11
-      local-pkg: 0.4.2
-      magic-string: 0.26.2
-      mlly: 0.5.4
-      pathe: 0.3.2
-      scule: 0.2.1
-      strip-literal: 0.4.0
-      unplugin: 0.7.2_vite@2.9.0
-    transitivePeerDependencies:
-      - esbuild
-      - rollup
-      - vite
-      - webpack
-    dev: true
-
   /unimport/0.4.5_34lyoy2px4mwvanejqhdojvpg4:
     resolution: {integrity: sha512-DnmiSt/HQIfhdcxOy4CGqwZDBh3WHg33euX1ge4X8hvquKBmw2PFvhoAJaBKxscOz0oYosoPoPT4tkDZWHhV0Q==}
     dependencies:
@@ -7265,8 +7209,8 @@ packages:
       - supports-color
     dev: true
 
-  /windicss-webpack-plugin/1.7.4:
-    resolution: {integrity: sha512-lszP4l+E5qoQs+UY0ZGNVCxq0y9guKmDT8vbgfWcjC8CRT8hqvd5B379/i98ntOhCQvnO7RhY+u1EyH2OnvQ7g==}
+  /windicss-webpack-plugin/1.7.5:
+    resolution: {integrity: sha512-+DwZwFcjgYrD/UU1UEs1TOTo4ijAwRkXEgJMttPd05NSC3ULvguvNKL5kNxrCTYs4OMJn68qbCfkjpI0mir4cQ==}
     dependencies:
       '@windicss/plugin-utils': 1.8.7
       debug: 4.3.4

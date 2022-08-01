@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { onClickOutside } from 'composables'
+import { Ref } from 'vue'
 
 interface Props {
-  position: {
-    x: number;
-    y: number;
-  }
-  isMenuOpen: boolean;
+  x: Ref<number> | number;
+  y: Ref<number> | number;
+  modelValue: boolean;
 }
 
 interface Emits {
-  (e: 'update:isMenuOpen', value: boolean): void;
+  (e: 'update:modelValue', value: boolean): void;
 }
 
 defineProps<Props>()
@@ -19,7 +18,7 @@ const emit = defineEmits<Emits>()
 const menuList = [
   {
     label: '關閉',
-    event: () => emit('update:isMenuOpen', false)
+    event: () => emit('update:modelValue', false)
   },
   {
     label: 'alert',
@@ -44,10 +43,11 @@ const menuList = [
     absolute
   "
     :style="{
-      top: position.y + 'px',
-      left: position.x + 'px'
+      top: y + 'px',
+      left: x + 'px'
     }"
   >
+    <div>{{ x }} {{ y }}</div>
     <ul>
       <li
         v-for="item in menuList"

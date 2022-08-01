@@ -5,5 +5,11 @@
   "include": [
     "**/*",
     "**/*.vue"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/**/*.story.vue",
+    "**/**/*.md",
+    "**/dist",
   ]
 }

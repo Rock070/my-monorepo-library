@@ -1,2 +1,3 @@
 export * from './onClickOutside'
-export * from './usePointerPosition'
+export * from './usePointer'
+export * from './useEventListener'

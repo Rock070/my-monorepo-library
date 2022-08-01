@@ -8,7 +8,15 @@
   - story & test case
   - 打包後上去
 
-  瞭解 unocss, 如何打包，並包括 css, ui ts file 為什麼找不到檔案路徑
+待瞭解 
+  - unocss, 
+  - 如何打包，並包括 css, ui
+  - 打包後的型別
+  - ts file 為什麼找不到檔案路徑
+  - workspace import 打包後的檔案
+  - package.json: module, main, export 用法
+  - rollup 設定檔是不是放根目錄就好
+
 
 ## side project list
 

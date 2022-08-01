@@ -38,6 +38,7 @@ importers:
 
   package/ui:
     specifiers:
+      '@histoire/plugin-vue': ^0.9.0
       '@vitejs/plugin-vue': ^2.3.3
       '@vueuse/core': ^8.9.4
       composables: workspace:^1.0.0
@@ -55,6 +56,7 @@ importers:
       vite: 2.9.14
       vue: 3.2.37
     devDependencies:
+      '@histoire/plugin-vue': 0.9.0_histoire@0.8.4+vue@3.2.37
       histoire: 0.8.4_vite@2.9.14+vue@3.2.37
       vite-plugin-windicss: 1.8.7_vite@2.9.14
       windicss: 3.5.6
@@ -582,6 +584,12 @@ packages:
       '@histoire/vendors': 0.8.4
     dev: true
 
+  /@histoire/controls/0.9.0:
+    resolution: {integrity: sha512-6DDIfckJSP18Dn9rQTlGyP/9zRSOlb9PjplV/4UUElOrCRq/UrFGNd/cvDCAIvzv+fo54LQ798arkaoWJvalTA==}
+    dependencies:
+      '@histoire/vendors': 0.9.0
+    dev: true
+
   /@histoire/plugin-vue/0.8.4_histoire@0.8.4+vue@3.2.37:
     resolution: {integrity: sha512-WTFWKylPxVMd2Y64+baynzThXwJTonx9yXPivFU21pPMFTP0EhhFJG70LBBHzxbZqo7kjpPFDT0RZy6Fta5vog==}
     peerDependencies:
@@ -595,12 +603,33 @@ packages:
       vue: 3.2.37
     dev: true
 
+  /@histoire/plugin-vue/0.9.0_histoire@0.8.4+vue@3.2.37:
+    resolution: {integrity: sha512-Y35v4SrZC3gKlERnuYGRZwfKinSq+C3qV/vVyXLWE4G0IiaKbSACN8OSfC7haii+eV4UzSVK1s38YAybhv8afA==}
+    peerDependencies:
+      histoire: ^0.9.0
+      vue: ^3.2.31
+    dependencies:
+      '@histoire/controls': 0.9.0
+      '@histoire/shared': 0.9.0
+      '@histoire/vendors': 0.9.0
+      histoire: 0.8.4_vite@2.9.14+vue@3.2.37
+      vue: 3.2.37
+    dev: true
+
   /@histoire/shared/0.8.4:
     resolution: {integrity: sha512-9YAjVsV9owtjH2M0IS3HcQZ4vuxOm38MFr3uzns58qYQFXVIewe7wqDx8dO3Sju+/pYYp9epfek533Z202vWqQ==}
     dev: true
 
+  /@histoire/shared/0.9.0:
+    resolution: {integrity: sha512-//u1o0r4myZhuENkh6DOEsvmb0DLVxc/z/0L3szfz5zImCDxfTKj9L1h8iWOX6gt3M5eUUzi87gvo4P/BePrBQ==}
+    dev: true
+
   /@histoire/vendors/0.8.4:
     resolution: {integrity: sha512-h94N2tKPi6jcpBNqRPr6+XH3uCW7nBHr0Cza2y8KZHOXsHgjfQjSlcbFVjdSfpR5yjNGLcqRvROwHKBHduIoBQ==}
+    dev: true
+
+  /@histoire/vendors/0.9.0:
+    resolution: {integrity: sha512-A6QYrbNlQw9n19HanMtQ5/7fHRx0aTmkzK0IyYP2xgr11xGdadHd4JgGdl5+UPdftw0NJWSefl+/r749VP7KeA==}
     dev: true
 
   /@humanwhocodes/config-array/0.9.5:

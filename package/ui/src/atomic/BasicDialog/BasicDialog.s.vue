@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import BasicDialog from './BasicDialog.vue'
+import BasicDialog from './index.vue'
 
 const state = reactive({
   show: false,

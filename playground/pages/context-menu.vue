@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted, onUnmounted, Ref, ButtonHTMLAttributes } from 'vue'
 import { useToggle } from '@vueuse/core'
-import { ContextMenu } from 'ui'
-import { isClient } from 'utils'
-import ui from './ui.vue'
-import { usePointer, useEventListener } from 'composables'
+import { usePointer } from 'composables'
 
+// TODO: 讓 style 跟 js 打包在一起
+import { ContextMenu } from 'ui/dist/atomic.es'
+import 'ui/dist/style.css'
+
+console.debug(ContextMenu)
 const [isMenuOpen, toggleMeunOpen] = useToggle()
 const { x, y } = usePointer()
 

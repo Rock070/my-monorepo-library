@@ -1,6 +1,10 @@
 import { defineConfig } from 'histoire'
+import { HstVue } from '@histoire/plugin-vue'
 
 export default defineConfig({
+  plugins: [
+    HstVue()
+  ],
   theme: {
     title: 'Acme Inc.',
     logo: {
@@ -29,6 +33,5 @@ export default defineConfig({
     },
     logoHref: 'https://google.com'
     // favicon: './assets/koala.png',
-  },
-  setupFile: './src/histoire.setup.ts'
+  }
 })

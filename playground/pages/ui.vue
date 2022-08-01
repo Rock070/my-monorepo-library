@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { BasicDropdown } from 'ui'
-
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 import vue from '@vitejs/plugin-vue'
 import WindiCSS from 'vite-plugin-windicss'
+import dts from 'vite-plugin-dts'
 import { defineConfig } from 'vite'
 
 const { resolve } = require('path')
@@ -7,7 +8,8 @@ const { resolve } = require('path')
 export default defineConfig({
   plugins: [
     vue(),
-    WindiCSS()
+    WindiCSS(),
+    dts()
   ],
   resolve: {
     alias: {
@@ -16,11 +18,10 @@ export default defineConfig({
   },
   build: {
     lib: {
-      // entry: resolve(__dirname, '/index.ts'),
-      entry: resolve(__dirname, 'index.ts'),
+      entry: resolve(__dirname, 'main.ts'),
       name: 'dist',
       // the proper extensions will be added
-      fileName: 'atomic'
+      fileName: 'index'
     },
     rollupOptions: {
       external: ['vue'],

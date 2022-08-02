@@ -11,5 +11,8 @@
     "**/**/*.story.vue",
     "**/**/*.md",
     "**/dist",
+  ],
+  "references": [
+    { "path": "./tsconfig.node.json" }
   ]
 }

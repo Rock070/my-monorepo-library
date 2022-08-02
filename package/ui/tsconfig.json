@@ -8,11 +8,18 @@
     "strict": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "sourceMap": true,
+    "rootDir": "src",
+    "declaration": true,
+    "baseUrl": "./",
+    "paths": {
+      "@": ["src"]
+    }
   },
   "include": [
-    "env.d.ts",
+    "./env.d.ts",
     "src/**/*",
-    "src/**/*.vue"
-  ]
+  ],
+  "exclude": ["node_modules"]
 }

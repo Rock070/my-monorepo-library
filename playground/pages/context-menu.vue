@@ -3,7 +3,7 @@ import { useToggle } from '@vueuse/core'
 import { usePointer } from 'composables'
 
 // TODO: 讓 style 跟 js 打包在一起
-import { ContextMenu } from 'ui/dist/atomic.es'
+import { ContextMenu } from 'ui'
 import 'ui/dist/style.css'
 
 console.debug(ContextMenu)

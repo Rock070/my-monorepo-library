@@ -1,1 +1,1 @@
-/// <reference types="histoire/vue" />
+/// <reference types="@histoire/plugin-vue/components" />

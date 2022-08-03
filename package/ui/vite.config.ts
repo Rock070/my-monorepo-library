@@ -23,15 +23,6 @@ export default defineConfig({
       // the proper extensions will be added
       fileName: 'index'
     },
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue'
-        },
-        dir: resolve(__dirname, 'dist'),
-        format: 'esm'
-      }
-    }
+    rollupOptions: require('./rollup.config')
   }
 })

@@ -1,4 +1,4 @@
-function debounce (func, delay: number) {
+export function throttle (func, delay: number) {
   let timer
   return () => {
     if (timer) clearTimeout(timer)

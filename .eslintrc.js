@@ -20,7 +20,11 @@ module.exports = {
     'no-console': ['error', {
       allow: ['warn', 'error', 'debug', 'assert']
     }],
-    'no-unused-vars': 'warn'
+    'no-unused-vars': 'warn',
+    'vue/no-template-target-blank': ['error', {
+      enforceDynamicLinks: 'always'
+    }]
+
   },
   overrides: [
     {

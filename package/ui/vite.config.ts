@@ -15,14 +15,5 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src')
     }
-  },
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'main.ts'),
-      name: 'dist',
-      // the proper extensions will be added
-      fileName: 'index'
-    },
-    rollupOptions: require('./rollup.config')
   }
 })

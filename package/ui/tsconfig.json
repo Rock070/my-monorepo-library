@@ -10,16 +10,17 @@
     "resolveJsonModule": true,
     "jsx": "preserve",
     "sourceMap": true,
-    "rootDir": "src",
+    "rootDir": "./src",
     "declaration": true,
     "baseUrl": "./",
     "paths": {
-      "@": ["src"]
+      "@": ["./src"]
     }
   },
   "include": [
     "./env.d.ts",
     "src/**/*",
+    "../../vue-shim.d.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

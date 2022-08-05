@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { useEventListener } from './useEventListener'
-import { isClient } from 'utils'
+import { isClient } from 'utils/main'
 
 export function usePointer () {
   const x = ref(0)

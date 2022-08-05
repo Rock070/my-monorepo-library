@@ -11,15 +11,5 @@
         香蕉
       </option>
     </select>
-    <div>{{ obj }}</div>
   </div>
 </template>
-
-<script setup lang="ts">
-interface Rock {
-  a: number
-}
-const obj:Rock = {
-  a: 1
-}
-</script>

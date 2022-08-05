@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted } from 'vue'
-import { isClient } from 'utils'
+import { isClient } from 'utils/main'
 
 interface EventListener {
   (evt: Event): void

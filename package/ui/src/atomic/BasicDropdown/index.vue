@@ -3,6 +3,7 @@
     <select
       id=""
       name="fruit"
+      class="my-dropdown"
     >
       <option value="apple">
         蘋果
@@ -13,3 +14,9 @@
     </select>
   </div>
 </template>
+
+<style>
+.my-dropdown {
+  text-align: center;
+}
+</style>

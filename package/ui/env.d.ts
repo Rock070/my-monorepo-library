@@ -1,3 +1,4 @@
+/// <reference types="vite-svg-loader" />
 /// <reference types="@histoire/plugin-vue/components" />
 
 declare module '*.vue' {

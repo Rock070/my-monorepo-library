@@ -11,7 +11,7 @@
     "jsx": "preserve",
     "sourceMap": true,
     "rootDir": "./src",
-    "declaration": true, // 產生 .d.ts 檔案
+    // "declaration": true, // 產生 .d.ts 檔案
     "baseUrl": "./",
     "paths": {
       "@": ["./src"]

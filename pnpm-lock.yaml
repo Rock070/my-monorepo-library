@@ -52,6 +52,7 @@ importers:
       vite: ^2.9.0
       vite-plugin-dts: ^1.4.1
       vite-plugin-windicss: ^1.8.7
+      vite-svg-loader: ^3.4.0
       vue: ^3.2.37
       windicss: ^3.5.6
     dependencies:
@@ -67,6 +68,7 @@ importers:
       histoire: 0.9.0_vite@2.9.14
       vite-plugin-dts: 1.4.1_vite@2.9.14
       vite-plugin-windicss: 1.8.7_vite@2.9.14
+      vite-svg-loader: 3.4.0
       windicss: 3.5.6
 
   package/utils:
@@ -7290,6 +7292,13 @@ packages:
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /vite-svg-loader/3.4.0:
+    resolution: {integrity: sha512-xD3yb1FX+f4l9/TmsYIqyki8ncpcVsZ2gEJFh/wLuNNqt55C8OJ+JlcMWOA/Z9gRA+ylV/TA1wmJLxzZkCRqlA==}
+    dependencies:
+      '@vue/compiler-sfc': 3.2.37
+      svgo: 2.8.0
     dev: true
 
   /vite/2.9.0:

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import VDetails from './index.vue'
+import VDetails from './v-details.vue'
 
 </script>
 
 <template>
   <Story title="Atoms/v-details">
-    <v-details>
+    <v-details :style="{ width: '200px' }">
       <template #summary>
         這是一個 details
       </template>

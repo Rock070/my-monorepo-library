@@ -17,10 +17,10 @@ module.exports = {
   ],
   rules: {
     'vue/multi-word-component-names': 'off',
-    'vue/component-name-in-template-casing': ['error', 'kebab-case', {
-      registeredComponentsOnly: true,
-      ignores: []
-    }],
+    // 'vue/component-name-in-template-casing': ['error', 'kebab-case', {
+    //   registeredComponentsOnly: true,
+    //   ignores: []
+    // }],
     'vue/no-template-target-blank': ['error', {
       enforceDynamicLinks: 'always'
     }],

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useEventListener, useToggle } from '@vueuse/core'
 import { isClient } from 'utils/is'
-import debounce from 'utils'
+import { debounce } from 'utils'
 
 const [isShow, toggleShow] = useToggle(true)
 

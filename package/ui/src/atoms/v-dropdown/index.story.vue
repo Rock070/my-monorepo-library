@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import VDropdown from './index.vue'
+import VDropdown from './v-dropdown.vue'
 
 </script>
 

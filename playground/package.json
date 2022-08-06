@@ -18,7 +18,6 @@
     "composables": "workspace:^1.0.0",
     "ui": "workspace:^1.0.0",
     "utils": "workspace:^1.0.0",
-    "vexip-ui": "2.0.0-beta.20",
     "vite": "2.9.0",
     "vue": "^3.2.31"
   }

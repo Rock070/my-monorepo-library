@@ -1,6 +1,6 @@
 
 import 'virtual:windi.css'
-export { default as BasicDropdown } from '@/atomic/BasicDropdown/index.vue'
-export { default as BasicDialog } from '@/atomic/BasicDialog/index.vue'
-export { default as ContextMenu } from '@/atomic/ContextMenu/index.vue'
-export { default as BTree } from '@/atomic/BTree/index.vue'
+export { default as VDropdown } from '@/atoms/VDropdown/index.vue'
+export { default as VDialog } from '@/atoms/VDialog/index.vue'
+export { default as VContextMenu } from '@/atoms/VContextMenu/index.vue'
+export { default as VTree } from '@/atoms/VTree/index.vue'

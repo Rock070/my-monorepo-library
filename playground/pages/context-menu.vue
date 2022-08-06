@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
 import { usePointer } from 'composables'
-
 // TODO: 讓 style 跟 js 打包在一起
+import 'ui/dist/style.css'
 import { ContextMenu } from 'ui'
 
 console.debug(ContextMenu)
@@ -22,6 +22,7 @@ const { x, y } = usePointer()
     @contextmenu.prevent="toggleMeunOpen(true)"
   >
     <div>123</div>
+    <BasicDropdown />
     <ContextMenu
       v-if="isMenuOpen"
       v-model="isMenuOpen"

@@ -7,10 +7,18 @@ const { resolve } = require('path')
 
 export default defineConfig({
   plugins: [
-    vue(),
-    WindiCSS()
+    vue({
+      template: {
+        compilerOptions: {
+
+        }
+      }
+    }),
+    WindiCSS({
+      preflight: false
+    })
     // dts({
-    //   rollupTypes: true // 匯總 type
+    // rollupTypes: true // 匯總 type
     // })
   ],
   // external: [], // 排除的依赖包
@@ -20,6 +28,7 @@ export default defineConfig({
     }
   },
   build: {
+    cssCodeSplit: false,
     lib: {
       entry: resolve(__dirname, 'main.ts'),
       name: 'ui', // required when output formats include "umd" or "iife".

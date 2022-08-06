@@ -1,5 +1,9 @@
+<script setup lang="ts">
+
+</script>
 <template>
   <div>
+    <BasicDropdown />
     <select
       id=""
       name="fruit"

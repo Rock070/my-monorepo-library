@@ -8,16 +8,10 @@ const { resolve } = require('path')
 
 export default defineConfig({
   plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-
-        }
-      }
-    }),
+    vue(),
     svgLoader(),
     WindiCSS({
-      preflight: false
+      // preflight: false
     })
     // dts({
     // rollupTypes: true // 匯總 type

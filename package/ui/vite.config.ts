@@ -11,7 +11,7 @@ export default defineConfig({
     vue(),
     svgLoader(),
     WindiCSS({
-      // preflight: false
+      preflight: false
     })
     // dts({
     // rollupTypes: true // 匯總 type

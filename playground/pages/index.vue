@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { VDropdown } from 'ui'
+import 'ui/dist/style.css'
 </script>
 
 <template>
   <div>
-    <VDropdown />
+    <v-dropdown />
   </div>
 </template>

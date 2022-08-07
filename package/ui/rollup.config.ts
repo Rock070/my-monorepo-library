@@ -1,35 +1,34 @@
-/**
- * TODO: terser 壓縮
- * TODO: windi => uno
- * TODO: css 不用單獨引入
- * TODO: dts 另外打包
- * TODO: 拆分 historie 為另一個 repo，拿掉 vite
- */
+const { resolve } = require('path')
+const { readJSONSync } = require('fs-extra')
 
-import { readJSONSync } from 'fs-extra'
-import { resolve } from 'path'
-const { source, main, module } = readJSONSync(
+const componentDir = resolve(__dirname, 'src/atoms')
+
+const { source } = readJSONSync(
   resolve(__dirname, './package.json'),
   'utf-8'
 )
 
-const basicConfig = {
-  output:
-  [
-    // { file: main, format: 'cjs' },
-    // {
-    //   file: module,
-    //   format: 'esm',
-    //   globals: {
-    //     vue: 'Vue' // 宣告全域變數
-    //   }
-    // }
-    // { file: 'dist/bundle.js', format: 'iife', name: 'ui' } // 給瀏覽器
-    // {
-    //   file: 'dist/index.umd.js',
-    //   format: 'umd'
-    // }
+module.exports = {
+  input: [source],
+  external: ['vue', '@vueuse/core'], // 不打包進去的外部依賴
+  output: [
+    /**
+     * 打包一個 index.esm 給全局引入
+     */
+    {
+      format: 'esm',
+      dir: 'dist',
+      entryFileNames: 'index.mjs'
+    },
+    /**
+     * 打包一個 components/*.mjs 可以單獨引入
+     */
+    {
+      format: 'esm',
+      preserveModules: true, // 保留原始檔案結構
+      preserveModulesRoot: componentDir,
+      dir: 'dist/components',
+      entryFileNames: '[name].mjs'
+    }
   ]
 }
-
-export default [basicConfig]

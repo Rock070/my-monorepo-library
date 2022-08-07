@@ -36,7 +36,7 @@ if (isClient) {
   </transition>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .v-enter-active,
 .v-leave-active {
   transition: all 0.5s;

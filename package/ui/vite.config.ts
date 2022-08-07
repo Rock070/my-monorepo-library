@@ -3,57 +3,51 @@ import WindiCSS from 'vite-plugin-windicss'
 import svgLoader from 'vite-svg-loader'
 import dts from 'vite-plugin-dts'
 import { defineConfig } from 'vite'
+import { readJSONSync } from 'fs-extra'
+// import glob from 'fast-glob'
 
 const { resolve } = require('path')
 
-export default defineConfig({
-  plugins: [
-    vue(),
-    svgLoader(),
-    WindiCSS({
-      preflight: false
-    })
-    // dts({
-    // rollupTypes: true // 匯總 type
-    // })
-  ],
-  // external: [], // 排除的依赖包
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src')
+const componentDir = resolve(__dirname, 'src/atoms')
+
+const { source } = readJSONSync(
+  resolve(__dirname, './package.json'),
+  'utf-8'
+)
+
+export default defineConfig(async () => {
+  // file traversal list
+  // const input = await glob('src/atoms/**/*.{ts,vue}', {
+  //   cwd: __dirname,
+  //   absolute: true,
+  //   onlyFiles: true
+  // })
+
+  return {
+    plugins: [
+      vue(),
+      svgLoader(),
+      WindiCSS({
+        preflight: false
+      }),
+      dts({
+        exclude: ['node_modules'],
+        entryRoot: componentDir,
+        outputDir: 'dist/components'
+      })
+    ],
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src')
+      }
+    },
+    build: {
+      // cssCodeSplit: true, TODO: 將不同的 css 放進 component 內
+      lib: {
+        entry: source,
+        name: 'index' // required when output formats include "umd" or "iife".
+      },
+      rollupOptions: require('./rollup.config')
     }
-  },
-  build: {
-    cssCodeSplit: false,
-    lib: {
-      entry: resolve(__dirname, 'main.ts'),
-      name: 'ui', // required when output formats include "umd" or "iife".
-      // the proper extensions will be added
-      fileName: 'index',
-      formats: ['cjs', 'es', 'iife', 'umd']
-    }
-    //  rollupOptions: {
-    //     input,
-    //     external,
-    //     https://github.com/qmhc/vexip-ui/blob/main/vite.config.ts
-    //     output: [
-    //       {
-    //         format: 'cjs',
-    //         preserveModules: true,
-    //         preserveModulesRoot: componentsDir,
-    //         dir: 'lib',
-    //         entryFileNames: '[name].js'
-    //       },
-    //       {
-    //         format: 'es',
-    //         preserveModules: true,
-    //         preserveModulesRoot: componentsDir,
-    //         dir: 'es',
-    //         entryFileNames: '[name].mjs'
-    //       }
-    //     ],
-    //     treeshake: false
-    //   },
-    // rollupOptions: require('./rollup.config')
   }
 })

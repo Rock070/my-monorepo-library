@@ -24,7 +24,7 @@ onMounted(() => {
       refresh()
     }
   }, {
-    threshold: [0],
+    threshold: [1],
     root: El.value
   })
   intersectionObserver.observe(observerEl.value)
@@ -33,7 +33,7 @@ onMounted(() => {
 const page = ref(1)
 const IMAGE_PER_PAGE = 3
 
-const { refresh, pending } = useAsyncData(() => {
+const { refresh } = useAsyncData(() => {
   /* eslint-disable no-undef */
   return $fetch<ImgList[]>('https://picsum.photos/v2/list', {
     params: {
@@ -69,7 +69,7 @@ const { refresh, pending } = useAsyncData(() => {
       >
       <div
         ref="observerEl"
-        class="text-center"
+        class="text-center text-blue-600 py-5"
       >
         碰到底了
         <!-- TODO: loding 動畫 -->

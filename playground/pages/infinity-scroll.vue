@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import { useAsyncData } from '#imports'
 
 interface ImgList {
@@ -15,9 +15,10 @@ const imgList = reactive([])
 
 const El = ref<null | HTMLDivElement>(null)
 const observerEl = ref<null | HTMLDivElement>(null)
+const intersectionObserver = ref<IntersectionObserver | null>(null)
 
 onMounted(() => {
-  const intersectionObserver = new IntersectionObserver(([entries]) => {
+  intersectionObserver.value = new IntersectionObserver(([entries]) => {
     if (entries && entries.isIntersecting) {
       console.debug('進入可視區域')
       page.value++
@@ -27,7 +28,11 @@ onMounted(() => {
     threshold: [1],
     root: El.value
   })
-  intersectionObserver.observe(observerEl.value)
+  intersectionObserver.value.observe(observerEl.value)
+})
+
+onUnmounted(() => {
+  intersectionObserver.value.disconnect()
 })
 
 const page = ref(1)

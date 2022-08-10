@@ -6,7 +6,7 @@ interface EventListener {
 }
 
 export function useEventListener (
-  target: Window,
+  target: Window | HTMLElement,
   event: string,
   listener: EventListener,
   options?: boolean | AddEventListenerOptions

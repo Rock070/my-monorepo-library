@@ -7,5 +7,7 @@
 </template>
 
 <style>
-
+:root {
+ @apply bg-yellow-200;
+}
 </style>

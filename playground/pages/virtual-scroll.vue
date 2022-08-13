@@ -71,9 +71,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-<style>
-html {
- @apply bg-yellow-200;
-}
-</style>

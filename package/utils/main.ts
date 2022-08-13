@@ -1,5 +1,6 @@
-
 export * from './is'
 export * from './debonce'
 export * from './queueJob'
 export * from './throttle'
+export * from './random'
+export * from './commaNumber'

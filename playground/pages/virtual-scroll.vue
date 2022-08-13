@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import Virtual from '@/components/virtual-scroll.vue'
+import { $fetch } from 'ohmyfetch'
 
-const data = Array.from({ length: 2000 }, (_, id) => ({
-  id,
-  name: 'name' + id
-}))
+const data = await $fetch('https://jsonplaceholder.typicode.com/posts')
 
 </script>
 
@@ -15,6 +13,7 @@ const data = Array.from({ length: 2000 }, (_, id) => ({
     </h1>
     <virtual
       :list="data"
+      :item-min-height="88"
       class="
         relative
         h-[50vh]
@@ -25,13 +24,14 @@ const data = Array.from({ length: 2000 }, (_, id) => ({
       "
     >
       <template #default="{ item }">
-        <div class="py-5">
-          <div>
-            {{ item.name }}
-          </div>
-          <div>123123</div>
+        <div
+          class="py-5 relative"
+        >
+          {{ item.id }}. {{ item.body }}
         </div>
       </template>
     </virtual>
   </div>
 </template>
+
+<!-- :style="{ height: (random(1, 15) * 10) + 'px' }" -->

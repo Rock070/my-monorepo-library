@@ -2,32 +2,25 @@
 import { ref, onMounted, computed, nextTick } from 'vue'
 import { useEventListener } from '@vueuse/core'
 
-interface Item {
-  id: number;
-  name: string;
-}
 interface Props {
   list: any[];
-  itemMinHeight?: number;
+  itemMinHeight: number;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  itemMinHeight: 24
-})
+const props = defineProps<Props>()
 
 const virtualBoxEl = ref<HTMLDivElement | null>(null)
 const outerEl = ref<HTMLDivElement | null>(null)
 const itemsEl = ref<HTMLDivElement[] | null>(null)
 
-const nowData = ref<Item[]>([])
+const nowData = ref<any[]>([])
 nowData.value = props.list.slice(0, 20)
 
 const totalHeight = computed(() => {
-  return itemsHeightList.value.reduce((acc, item) => acc + item)
+  return props.list.length * props.itemMinHeight
 })
-const itemsHeightList = ref([])
 
-const scrollTop = ref(0)
+const itemsHeightList = ref([])
 
 /**
  * 1. 抓 props default 高度，算資料量 & transform
@@ -35,38 +28,56 @@ const scrollTop = ref(0)
  * 3. 用正確高度，算資料量 & transform
  */
 
+/**
+ * bug:
+ *   - item 間隔不對，translateY 應該要是前一個元素的 offsetHeight
+ *   - 最後一個 item 間隔不對
+ */
+
 const updatedHeight = () => {
   nextTick(() => {
     itemsHeightList.value.length = 0
 
-    itemsEl.value.forEach((item, index) => {
-      const accHeight = itemsHeightList.value[index - 1] || 0
-      let calHeight = item.offsetHeight + accHeight
-      if (index === 0) calHeight = outerEl.value.scrollTop
+    itemsEl.value.reduce((acc, item, index) => {
+      let accHeight = itemsHeightList.value[index - 1]
+      console.debug('item.offsetHeight', item.offsetHeight)
+      let height = item.offsetHeight + accHeight
+      if (index === 0) {
+        accHeight = 0
+        height = outerEl.value.scrollTop
+      }
 
-      itemsHeightList.value.push(calHeight)
-    })
+      console.debug(accHeight)
+      console.debug(height)
+      acc.value.push(height)
+      return acc
+    }, itemsHeightList)
   })
+}
+
+const updateData = () => {
+  /**
+   * 外容器高度
+   */
+  const h = outerEl.value.clientHeight
+
+  const start = Math.floor(outerEl.value.scrollTop / props.itemMinHeight)
+  const end = start + Math.floor(h / props.itemMinHeight) + 1
+  nowData.value = props.list.slice(start, end)
 }
 onMounted(() => {
   /**
    * init
    */
+  updateData()
   updatedHeight()
-  const len = Math.floor(outerEl.value.clientHeight / 24) + 1
-  nowData.value = props.list.slice(0, len)
-  useEventListener(outerEl.value, 'scroll', () => {
+
+  useEventListener(outerEl.value, 'scroll', event => {
     /**
      * scroll 後要抓新的 Dom Element 計算 transform
      */
     updatedHeight()
-    // TODO: total height
-    // TODO:
-    // const totalHeight = item * itemHeight
-    scrollTop.value = outerEl.value.scrollTop
-    const start = Math.floor(outerEl.value.scrollTop / 24)
-    const end = start + Math.floor(outerEl.value.clientHeight / 24) + 1
-    nowData.value = props.list.slice(start, end)
+    updateData()
   })
 })
 
@@ -76,7 +87,7 @@ onMounted(() => {
   <div ref="outerEl">
     <div
       ref="virtualBoxEl"
-      :style="{ height: 24 * 2000 + 'px' }"
+      :style="{ height: totalHeight + 'px' }"
     >
       <div
         v-for="(item, index) in nowData"

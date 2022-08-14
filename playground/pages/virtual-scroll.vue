@@ -33,5 +33,3 @@ const data = await $fetch('https://jsonplaceholder.typicode.com/posts')
     </virtual>
   </div>
 </template>
-
-<!-- :style="{ height: (random(1, 15) * 10) + 'px' }" -->

@@ -32,6 +32,7 @@ const itemsHeightList = ref([])
  * bug:
  *   - item 間隔不對，translateY 應該要是前一個元素的 offsetHeight
  *   - 最後一個 item 間隔不對
+ *   - 畫面初始化會擠在一起
  */
 
 const updatedHeight = () => {
@@ -93,7 +94,7 @@ onMounted(() => {
         v-for="(item, index) in nowData"
         :key="item.id"
         ref="itemsEl"
-        class="absolute"
+        class="absolute will-change-transform"
         :style="{ transform: `translateY(${itemsHeightList[index]}px)` }"
       >
         <slot :item="item" />

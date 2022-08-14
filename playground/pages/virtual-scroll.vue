@@ -13,7 +13,7 @@ const data = await $fetch('https://jsonplaceholder.typicode.com/posts')
     </h1>
     <virtual
       :list="data"
-      :item-min-height="88"
+      :item-min-height="64"
       class="
         relative
         h-[50vh]
@@ -23,11 +23,11 @@ const data = await $fetch('https://jsonplaceholder.typicode.com/posts')
         border-purple-400
       "
     >
-      <template #default="{ item }">
+      <template #default="{ item, height }">
         <div
-          class="py-5 relative"
+          class="py-2 relative"
         >
-          {{ item.id }}. {{ item.body }}
+          {{ item.id }}. {{ height }} {{ item.body }}
         </div>
       </template>
     </virtual>

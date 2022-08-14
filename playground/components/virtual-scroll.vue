@@ -20,7 +20,12 @@ const totalHeight = computed(() => {
   return props.list.length * props.itemMinHeight
 })
 
-const itemsHeightList = ref([])
+interface ItemsHeight {
+  offsetHeight: number;
+  transformY: number;
+}
+
+const heightList = ref<ItemsHeight[]>([])
 
 /**
  * 1. 抓 props default 高度，算資料量 & transform
@@ -35,24 +40,25 @@ const itemsHeightList = ref([])
  *   - 畫面初始化會擠在一起
  */
 
-const updatedHeight = () => {
-  nextTick(() => {
-    itemsHeightList.value.length = 0
-
+const updatedHeight = async () => {
+  await nextTick(() => {
+    console.debug('asasd', itemsEl.value[0].offsetHeight)
+    heightList.value.length = 0
     itemsEl.value.reduce((acc, item, index) => {
-      let accHeight = itemsHeightList.value[index - 1]
-      console.debug('item.offsetHeight', item.offsetHeight)
-      let height = item.offsetHeight + accHeight
-      if (index === 0) {
-        accHeight = 0
-        height = outerEl.value.scrollTop
-      }
+      console.debug(item.offsetHeight)
+      const lastItem = heightList.value[index - 1]
+      let Y = lastItem?.offsetHeight + lastItem?.transformY
 
-      console.debug(accHeight)
-      console.debug(height)
-      acc.value.push(height)
+      if (index === 0) Y = outerEl.value.scrollTop
+      acc.value.push({
+        offsetHeight: item.offsetHeight,
+        transformY: Y
+      })
+
+      console.debug('last offsetHeight', acc.value[index - 1]?.offsetHeight)
+      console.debug('Y', Y)
       return acc
-    }, itemsHeightList)
+    }, heightList)
   })
 }
 
@@ -66,19 +72,21 @@ const updateData = () => {
   const end = start + Math.floor(h / props.itemMinHeight) + 1
   nowData.value = props.list.slice(start, end)
 }
-onMounted(() => {
+onMounted(async () => {
   /**
    * init
    */
   updateData()
-  updatedHeight()
 
-  useEventListener(outerEl.value, 'scroll', event => {
+  await updatedHeight()
+  await updatedHeight()
+
+  useEventListener(outerEl.value, 'scroll', async () => {
     /**
      * scroll 後要抓新的 Dom Element 計算 transform
      */
-    updatedHeight()
     updateData()
+    await updatedHeight()
   })
 })
 
@@ -95,9 +103,12 @@ onMounted(() => {
         :key="item.id"
         ref="itemsEl"
         class="absolute will-change-transform"
-        :style="{ transform: `translateY(${itemsHeightList[index]}px)` }"
+        :style="{ transform: `translateY(${heightList[index]?.transformY}px)` }"
       >
-        <slot :item="item" />
+        <slot
+          :item="item"
+          :height="heightList[index]"
+        />
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 export * from './is'
-export * from './debonce'
+export * from './debounce'
 export * from './queueJob'
 export * from './throttle'
 export * from './random'

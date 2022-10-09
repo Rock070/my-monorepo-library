@@ -2,7 +2,14 @@ todo
 
 - [ ] Avatar
 - [ ] skeleton loading
-- 
+- [ ] auto resize textarea
+- [ ] teleport select
+  - searchable
+  - labelable
+  - open auto focus chosen option
+  - 
+- select
+- calendar
 
 doing
 

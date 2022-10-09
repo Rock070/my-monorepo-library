@@ -4,26 +4,33 @@ import VIconBase from '@/atoms/v-icon-base/index.vue'
 </script>
 
 <template>
-  <details ref="detailsEl">
+  <details
+    ref="detailsEl"
+    class="v-details"
+  >
     <summary
       class="
         cursor-pointer
         flex items-center justify-between
-        font-bold
+        font-bold list-none
       "
     >
       <slot
         name="summary"
       />
-      <v-icon-base
-        width="12"
-        height="10"
-        icon-name="toggle-arrow"
-        icon-title="展開或收合內容"
-        class="icon transition-transform ease-in-out"
+      <slot
+        name="icon"
       >
-        <icon-arrow />
-      </v-icon-base>
+        <v-icon-base
+          width="12"
+          height="10"
+          icon-name="toggle-arrow"
+          icon-title="展開或收合內容"
+          class="v-details--icon transition-transform ease-in-out"
+        >
+          <icon-arrow />
+        </v-icon-base>
+      </slot>
     </summary>
     <div class="pt-4">
       <slot />
@@ -31,14 +38,10 @@ import VIconBase from '@/atoms/v-icon-base/index.vue'
   </details>
 </template>
 
-<style scoped>
-summary {
-  list-style: none;
-}
-
-details[open] {
-  .icon {
-    @apply rotate-180;
+<style>
+.v-details[open] {
+  .v-details--icon {
+    transform: rotate(180deg);
   }
 }
 </style>

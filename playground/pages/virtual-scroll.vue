@@ -23,12 +23,13 @@ const data = await $fetch('https://jsonplaceholder.typicode.com/posts')
         border-purple-400
       "
     >
-      <template #default="{ item, height }">
+      <template #default="{ item }">
         <div
           class="py-2 relative"
         >
-          {{ item.id }}. {{ height }} {{ item.body }}
+          {{ item.id }}. {{ item.body }}
         </div>
+        <!-- <div>{{height}}</div> -->
       </template>
     </virtual>
   </div>

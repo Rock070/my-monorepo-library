@@ -15,7 +15,7 @@ import { ref } from 'vue'
  *
  * 切換 toggle tab => changeActive('value')
  */
-export const useActive = <T = any>(
+const useActive = <T = any>(
   rawData: T,
   cb?: (newData: T) => void | undefined
 ) => {
@@ -31,8 +31,7 @@ export const useActive = <T = any>(
      */
     cb?.(newData)
   }
-  return {
-    activeValue,
-    changeActive
-  }
+  return [activeValue, changeActive] as const
 }
+
+export default useActive

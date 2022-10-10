@@ -2,7 +2,7 @@
 import IconArrow from '@/assets/svg/triangle-arrow.svg?component'
 import IconSearch from '@/assets/svg/search.svg?component'
 import VIconBase from '@/atoms/v-icon-base/index.vue'
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
 
 interface Option {
   text: string;
@@ -47,6 +47,10 @@ const toggle = (val?: boolean) => {
 
   isOpen.value = !isOpen.value
 }
+const changeActive = (val: Props['modelValue']) => {
+  emits('update:modelValue', val)
+  toggle(false)
+}
 
 const modelValueDisplay = computed(() => {
   const item = props.options.find(item => props.modelValue === item.value)
@@ -55,28 +59,64 @@ const modelValueDisplay = computed(() => {
   return ''
 })
 
-const changeActive = (val: Props['modelValue']) => {
-  emits('update:modelValue', val)
-  toggle(false)
+/**
+ * 搜尋功能
+ */
+const searchHandler = (event: Event) => {
+  if (!props.options || props.options.length === 0 || !event.target) return
+
+  const inputValue = (event.target as HTMLInputElement).value
+  const regex = new RegExp(inputValue, 'i')
+
+  if (!inputValue) {
+    displayOptions.value = props.options
+    return
+  }
+  displayOptions.value = props.options.filter(item => regex.test(item.text))
 }
 
+const displayOptions = ref<Option[]>([])
+
+onMounted(() => {
+  displayOptions.value = props.options
+})
+
 const vSelectFieldRef = ref<HTMLDivElement | null>(null)
+const liRefs = ref<HTMLLIElement| null>(null)
 
 const vSelectDropdownStyle = ref({})
 
 watch(isOpen, val => {
   if (!val) return
-
+  /**
+   * 計算 dropdown teleport 位置
+   */
   if (vSelectFieldRef.value) {
     const vSelectRect = vSelectFieldRef.value.getBoundingClientRect()
 
     const { top, right, width, height } = vSelectRect
 
     vSelectDropdownStyle.value = {
-      top: `${top + height - 1}px`,
+      top: `${top + height - 2}px`,
       right: `${right - width}px`,
       width: `${width}px`
     }
+  }
+
+  /**
+   * focus 已選項目
+   */
+  if (props.modelValue) {
+    nextTick(() => {
+      if (liRefs.value) {
+        const entries = Object.entries(liRefs.value)
+        entries.forEach(([_, el]) => {
+          if (el.classList.contains('v-select--dropdown--li__active')) {
+            el.focus()
+          }
+        })
+      }
+    })
   }
 })
 
@@ -85,9 +125,10 @@ watch(isOpen, val => {
   <div class="v-select">
     <div
       ref="vSelectFieldRef"
+      tabindex="0"
       class="v-select--field"
       :style="{
-        'border-bottom-width': isOpen ? '0': '1px',
+        'border-bottom-width': isOpen ? '0': '1.5px',
         'border-bottom-right-radius': isOpen ? '0': '6px',
         'border-bottom-left-radius': isOpen ? '0': '6px',
       }"
@@ -102,7 +143,7 @@ watch(isOpen, val => {
         class="v-select--field--icon--arrow v-select--field--icon--arrow__active"
         :class="isOpen && 'v-select--field--icon--arrow__active'"
       >
-        <icon-arrow />
+        <icon-arrow class="fill-gray-500" />
       </v-icon-base>
     </div>
     <teleport to="body">
@@ -111,7 +152,9 @@ watch(isOpen, val => {
         class="v-select--dropdown"
         :style="vSelectDropdownStyle"
       >
-        <div class="v-select--dropdown--field">
+        <div
+          class="v-select--dropdown--search"
+        >
           <v-icon-base
             width="12"
             height="12"
@@ -122,15 +165,22 @@ watch(isOpen, val => {
           </v-icon-base>
           <input
             type="text"
-            class="v-select--dropdown--field--input"
+            class="v-select--dropdown--search--input"
             :placeholder="placeholder"
+            @input="searchHandler($event)"
           >
         </div>
         <ul role="menu">
           <li
-            v-for="item in options"
+            v-for="item in displayOptions"
+            ref="liRefs"
             :key="item.value"
             role="menuitem"
+            :data-value="item.value"
+            tabindex="0"
+            :class="
+              { 'v-select--dropdown--li__active': item.value === modelValue }
+            "
             @click="changeActive(item.value)"
           >
             {{ item.text }}
@@ -148,8 +198,12 @@ watch(isOpen, val => {
   @apply bg-white;
 
   &--field {
-    @apply border-solid border-[#DFDFDF];
-    @apply px-5 py-2;
+    border-top-width: 1.5px;
+    border-left-width: 1.5px;
+    border-right-width: 1.5px;
+    border-style: solid;
+    @apply border-[#DFDFDF];
+    @apply px-5 py-1;
     @apply rounded-md;
     @apply h-full flex justify-between items-center;
     @apply cursor-pointer;
@@ -165,17 +219,19 @@ watch(isOpen, val => {
   }
 
   &--dropdown {
+    @apply text-sm;
     @apply box-border;
-    @apply px-5 py-3;
+    @apply px-3 pb-3;
     @apply rounded-b-md;
     @apply border-solid border-[#DFDFDF];
     @apply border-t-0;
     @apply absolute;
 
-    &--field {
+    &--search {
       @apply space-x-2;
       @apply flex items-center;
       @apply px-2 py-1;
+      @apply my-1;
       @apply rounded-md;
       @apply border-solid border-[#DFDFDF];
 
@@ -186,9 +242,14 @@ watch(isOpen, val => {
       }
     }
 
+    &--li__active {
+      @apply bg-[#E9ECF4] text-[#66849C];
+    }
+
     ul {
       @apply p-0 m-0;
-      @apply mt-3;
+      @apply h-[calc(12px+28px*3)];
+      @apply overflow-y-scroll;
     }
 
     li {
@@ -196,6 +257,7 @@ watch(isOpen, val => {
       @apply cursor-pointer;
       @apply rounded-md;
       @apply px-2 py-1;
+      @apply my-1;
       @apply hover:bg-[#E9ECF4] hover:text-[#66849C];
     }
   }

@@ -10,6 +10,18 @@ const options = [
   {
     text: 'Banana',
     value: 'banana'
+  },
+  {
+    text: 'Cat',
+    value: 'cat'
+  },
+  {
+    text: 'Dog',
+    value: 'dog'
+  },
+  {
+    text: 'Elephant',
+    value: 'elephant'
   }
 ]
 

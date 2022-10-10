@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import IconArrow from './triangle-arrow.svg?component'
+import IconArrow from '@/assets/svg/triangle-arrow.svg?component'
 import VIconBase from '@/atoms/v-icon-base/index.vue'
 </script>
 

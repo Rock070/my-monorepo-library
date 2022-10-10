@@ -21,7 +21,6 @@ const props = withDefaults(defineProps<Props>(), {
 const emits = defineEmits<Emits>()
 
 const slots = useSlots()
-console.log(slots)
 
 </script>
 <template>

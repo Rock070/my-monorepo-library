@@ -2,7 +2,17 @@
 import IconArrow from '@/assets/svg/triangle-arrow.svg?component'
 import IconSearch from '@/assets/svg/search.svg?component'
 import VIconBase from '@/atoms/v-icon-base/index.vue'
+import { useEventListener } from '@vueuse/core'
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
+
+/**
+ * TODO:
+  * - [x] click outside
+  * - [ ] intersectionObserver change select direction
+  * - [ ] variant: label
+  * - [ ] Error style
+  * - [ ] multiple
+ */
 
 interface Option {
   text: string;
@@ -31,12 +41,6 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emits = defineEmits<Emits>()
-
-/**
- * TODO:
-  * - intersectionObserver change select direction
-  * - click outside
- */
 
 const isOpen = ref(false)
 const toggle = (val?: boolean) => {
@@ -79,6 +83,26 @@ const displayOptions = ref<Option[]>([])
 
 onMounted(() => {
   displayOptions.value = props.options
+})
+
+/**
+ * click outside
+ */
+useEventListener(window, 'click', event => {
+  if (!isOpen.value) return
+
+  const path = event.composedPath()
+  let isOutside = true
+  for (const item of path) {
+    if (item instanceof HTMLElement) {
+      if (item.classList.contains('v-select') || item.classList.contains('v-select--dropdown')) {
+        isOutside = false
+        break
+      }
+    }
+  }
+
+  if (isOutside) toggle(false)
 })
 
 const vSelectFieldRef = ref<HTMLDivElement | null>(null)
@@ -126,21 +150,19 @@ watch(isOpen, val => {
     <div
       ref="vSelectFieldRef"
       tabindex="0"
+      :class="{ '!border-b-0 !rounded-b-none' : isOpen }"
       class="v-select--field"
-      :style="{
-        'border-bottom-width': isOpen ? '0': '1.5px',
-        'border-bottom-right-radius': isOpen ? '0': '6px',
-        'border-bottom-left-radius': isOpen ? '0': '6px',
-      }"
       @click="toggle(!isOpen)"
     >
-      <div>{{ modelValueDisplay }}</div>
+      <div>
+        {{ modelValueDisplay }}
+      </div>
       <v-icon-base
         width="12"
         height="10"
         icon-name="toggle-arrow"
         icon-title="展開或收合內容"
-        class="v-select--field--icon--arrow v-select--field--icon--arrow__active"
+        class="v-select--field--icon--arrow"
         :class="isOpen && 'v-select--field--icon--arrow__active'"
       >
         <icon-arrow class="fill-gray-500" />
@@ -198,11 +220,7 @@ watch(isOpen, val => {
   @apply bg-white;
 
   &--field {
-    border-top-width: 1.5px;
-    border-left-width: 1.5px;
-    border-right-width: 1.5px;
-    border-style: solid;
-    @apply border-[#DFDFDF];
+    @apply border-solid border border-[#DFDFDF];
     @apply px-5 py-1;
     @apply rounded-md;
     @apply h-full flex justify-between items-center;
@@ -223,7 +241,7 @@ watch(isOpen, val => {
     @apply box-border;
     @apply px-3 pb-3;
     @apply rounded-b-md;
-    @apply border-solid border-[#DFDFDF];
+    @apply border border-solid border-[#DFDFDF];
     @apply border-t-0;
     @apply absolute;
 
@@ -233,7 +251,7 @@ watch(isOpen, val => {
       @apply px-2 py-1;
       @apply my-1;
       @apply rounded-md;
-      @apply border-solid border-[#DFDFDF];
+      @apply border border-solid border-[#DFDFDF];
 
       &--input {
         @apply outline-none border-none;

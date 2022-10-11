@@ -30,9 +30,15 @@ const value = ref('apple')
 
 <template>
   <Story title="Atoms/v-select">
-    <v-select
-      v-model="value"
-      :options="options"
-    />
+    <div class="h-full flex flex-col justify-between">
+      <v-select
+        v-model="value"
+        :options="options"
+      />
+      <v-select
+        v-model="value"
+        :options="options"
+      />
+    </div>
   </Story>
 </template>

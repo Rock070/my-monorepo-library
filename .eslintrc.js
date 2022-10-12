@@ -24,7 +24,7 @@ module.exports = {
     'vue/no-template-target-blank': ['error', {
       enforceDynamicLinks: 'always'
     }],
-    'no-console': ['error', {
+    'no-console': ['warn', {
       allow: ['warn', 'error', 'debug', 'assert']
     }],
     'no-unused-vars': 'warn'

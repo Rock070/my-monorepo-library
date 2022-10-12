@@ -9,6 +9,7 @@ import { ref, computed, watch, onMounted, nextTick } from 'vue'
  * TODO:
   * - [x] click outside
   * - [ ] intersectionObserver change select direction
+  * - [ ] computedPositionPath getElementRect
   * - [ ] variant: label
   * - [ ] Error style
   * - [ ] multiple
@@ -86,26 +87,23 @@ onMounted(() => {
 })
 
 /**
- * click outside
+ * click outside close
  */
 useEventListener(window, 'click', event => {
   if (!isOpen.value) return
 
   const path = event.composedPath()
-  let isOutside = true
-  for (const item of path) {
-    if (item instanceof HTMLElement) {
-      if (item.classList.contains('v-select') || item.classList.contains('v-select--dropdown')) {
-        isOutside = false
-        break
-      }
+
+  if (vSelectRef.value && vSelectDropdownRef.value) {
+    if (!path.includes(vSelectRef.value) && !path.includes(vSelectDropdownRef.value)) {
+      toggle(false)
     }
   }
-
-  if (isOutside) toggle(false)
 })
 
 const vSelectFieldRef = ref<HTMLDivElement | null>(null)
+const vSelectDropdownRef = ref<HTMLDivElement | null>(null)
+const vSelectRef = ref<HTMLDivElement | null>(null)
 const liRefs = ref<HTMLLIElement| null>(null)
 
 const vSelectDropdownStyle = ref({})
@@ -146,7 +144,10 @@ watch(isOpen, val => {
 
 </script>
 <template>
-  <div class="v-select">
+  <div
+    ref="vSelectRef"
+    class="v-select"
+  >
     <div
       ref="vSelectFieldRef"
       tabindex="0"
@@ -171,6 +172,7 @@ watch(isOpen, val => {
     <teleport to="body">
       <div
         v-if="isOpen"
+        ref="vSelectDropdownRef"
         class="v-select--dropdown"
         :style="vSelectDropdownStyle"
       >

@@ -1,4 +1,4 @@
 packages:
   - 'package/**'
   - 'playground/**'
-  - 'template/**'
+  - 'template/nuxt-template'
